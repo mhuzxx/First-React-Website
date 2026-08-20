@@ -37,3 +37,4 @@ src/
 - Update contact details (phone, email, address) in `src/components/Footer.jsx`.
 - Swap the hero/about/value/FAQ images by changing the `src` URLs in the matching section files under `src/sections/`.
 - Colors are plain hex values inside each component's `.css` file (no CSS variables), so search-and-replace a hex code to retheme.
+"# First-React-Website" 
