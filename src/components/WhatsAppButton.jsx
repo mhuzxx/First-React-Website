@@ -1,28 +1,113 @@
-import './WhatsAppButton.css';
+import React from "react";
 
-export default function WhatsAppButton() {
+export default function WhatsAppButton({
+  phoneNumber = "1234567890", // Replace with your number (country code + number, e.g., 919876543210 or 15551234567)
+  message = "Hello! I would like to know more about your services.",
+}) {
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
   return (
-    <a
-      className="whatsapp-btn"
-      href="https://wa.me/447470103120"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
-    >
-      <svg width="28" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M16 3C9.1 3 3.5 8.6 3.5 15.5c0 2.4.7 4.7 1.9 6.6L3 29l7.1-2.3c1.8 1 3.8 1.5 5.9 1.5 6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3z"
-          fill="#ffffff"
+    <>
+      {/* Pulse Animation */}
+      <style>{`
+        @keyframes whatsappPulseAura {
+          0% {
+            transform: scale(0.95);
+            opacity: 0.8;
+          }
+          50% {
+            transform: scale(1.12);
+            opacity: 0.4;
+          }
+          100% {
+            transform: scale(0.95);
+            opacity: 0.8;
+          }
+        }
+        .whatsapp-aura {
+          animation: whatsappPulseAura 3s infinite ease-in-out;
+        }
+        .whatsapp-btn-hover:hover {
+          transform: scale(1.08) !important;
+        }
+      `}</style>
+
+      {/* Floating Container (Fixed Bottom Right) */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "28px",
+          right: "28px",
+          zIndex: 99999,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "90px",
+          height: "90px",
+        }}
+      >
+        {/* Outer Soft Mint Glow Ring (Matching your image) */}
+        <div
+          className="whatsapp-aura"
+          style={{
+            position: "absolute",
+            width: "90px",
+            height: "90px",
+            borderRadius: "50%",
+            backgroundColor: "rgba(37, 211, 102, 0.18)",
+            pointerEvents: "none",
+          }}
         />
-        <path
-          d="M16 4.6C9.9 4.6 5 9.5 5 15.5c0 2.2.6 4.2 1.7 6L5.8 26l4.6-1.5c1.7 1 3.6 1.5 5.6 1.5 6.1 0 11-4.9 11-11S22.1 4.6 16 4.6z"
-          fill="#25D366"
+
+        {/* Middle Semi-Translucent Ring */}
+        <div
+          style={{
+            position: "absolute",
+            width: "74px",
+            height: "74px",
+            borderRadius: "50%",
+            backgroundColor: "rgba(37, 211, 102, 0.35)",
+            pointerEvents: "none",
+          }}
         />
-        <path
-          d="M12.3 10.4c-.3-.6-.6-.6-.9-.6h-.7c-.3 0-.7.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.3 2.6 4 6.3 5.5 3.1 1.2 3.7 1 4.4.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.5.2-1.7-.1-.2-.4-.3-.8-.5-.4-.2-2.1-1-2.4-1.2-.3-.1-.6-.2-.8.2-.2.4-.9 1.2-1.1 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7-.1-.2-.8-2-1.1-2.7z"
-          fill="#ffffff"
-        />
-      </svg>
-    </a>
+
+        {/* Main Solid WhatsApp Button */}
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Chat with us on WhatsApp"
+          className="whatsapp-btn-hover"
+          style={{
+            position: "relative",
+            width: "60px",
+            height: "60px",
+            backgroundColor: "#25D366",
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 8px 24px rgba(37, 211, 102, 0.45)",
+            cursor: "pointer",
+            textDecoration: "none",
+            transition: "transform 0.2s ease",
+          }}
+        >
+          {/* OFFICIAL WHATSAPP LOGO SVG */}
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 448 512"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="#FFFFFF"
+              d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+            />
+          </svg>
+        </a>
+      </div>
+    </>
   );
 }
