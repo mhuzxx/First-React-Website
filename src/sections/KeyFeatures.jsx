@@ -24,5 +24,6 @@ export default function KeyFeatures() {
         </div>
       </div>
     </section>
+    
   );
 }

@@ -28,11 +28,33 @@
   z-index: 1;
 }
 
-/* Main content */
-.hero-content {
+/* Swiper wrapper (sits above bg + overlay) */
+.hero-swiper {
   position: relative;
   z-index: 2;
+  width: 100%;
+  height: 100%;
+}
 
+.hero-swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  background: #ffffff;
+  opacity: 0.5;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #2768ff;
+}
+
+/* Main content */
+.hero-content {
   width: 100%;
   max-width: 1200px;
 
@@ -51,15 +73,10 @@
 /* Heading */
 .hero-title {
   margin: 0;
-
   color: #ffffff;
-
   font-size: clamp(42px, 5vw, 78px);
-
   font-weight: 700;
-
   line-height: 1.15;
-
   letter-spacing: -2px;
 }
 
@@ -71,85 +88,60 @@
 /* Paragraph */
 .hero-text {
   margin: 45px auto 0;
-
   max-width: 800px;
-
   color: #ffffff;
-
   font-size: clamp(18px, 2vw, 27px);
-
   line-height: 1.55;
-
   font-weight: 400;
 }
 
 /* Buttons container */
 .hero-actions {
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   gap: 16px;
-
   margin-top: 45px;
 }
 
 /* Common button */
 .hero-actions .btn {
   min-width: 170px;
-
   padding: 15px 28px;
-
   border-radius: 35px;
-
   font-size: 17px;
-
   font-weight: 600;
-
   text-decoration: none;
-
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
-
   transition: all 0.3s ease;
 }
 
 /* Primary button */
 .hero-actions .btn-primary {
   background: #2768ff;
-
   color: #ffffff;
-
   border: 2px solid #2768ff;
-
   box-shadow: 0 8px 25px rgba(39, 104, 255, 0.3);
 }
 
 .hero-actions .btn-primary:hover {
   background: #1d5be8;
-
   border-color: #1d5be8;
-
   transform: translateY(-3px);
 }
 
 /* Outline button */
 .hero-actions .btn-outline {
   background: transparent;
-
   color: #ffffff;
-
   border: 2px solid #ffffff;
 }
 
 .hero-actions .btn-outline:hover {
   background: #ffffff;
-
   color: #11113f;
-
   transform: translateY(-3px);
 }
 
@@ -159,36 +151,26 @@
    ========================= */
 
 @media (max-width: 768px) {
-
   .hero {
     height: calc(100vh - 100px);
     min-height: 550px;
   }
-
   .hero-title {
     font-size: 42px;
-
     letter-spacing: -1px;
   }
-
   .hero-text {
     margin-top: 28px;
-
     font-size: 18px;
   }
-
   .hero-text br {
     display: none;
   }
-
   .hero-actions {
     margin-top: 32px;
-
     flex-direction: column;
-
     width: 100%;
   }
-
   .hero-actions .btn {
     width: 200px;
   }
